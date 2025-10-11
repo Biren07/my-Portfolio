@@ -36,7 +36,6 @@ const skills = [
   { name: "Python", level: 50, category: "backend", icon: "python" },
   //Database 
    { name: "MongoDB", level: 90, category: "database", icon: "mongodb" },
-   { name: "SQL", level: 60, category: "database", icon: "sql" },
    { name: "MySQL", level: 90, category: "database", icon: "mysql" },
   // Tools
   { name: "Git", level: 90, category: "tools", icon: "git" },
