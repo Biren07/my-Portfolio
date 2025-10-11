@@ -21,7 +21,7 @@ const projects = [
     id: 7,
     title: "ShopNest",
     category: "Ecommerce",
-    description: "ShopNest is a dynamic multi-vendor eCommerce platform that connects customers with a wide range of sellers in one convenient marketplace. It enables vendors to easily create and manage their stores, showcase products, and handle orders, while customers enjoy a seamless shopping experience with secure payments, product reviews, and fast delivery. With its user-friendly interface and robust backend, ShopNest simplifies online selling and shopping for everyone.",
+    description: "ShopNest is a dynamic multi-vendor eCommerce platform that connects customers with a wide range of sellers in one convenient marketplace.",
     image: "/projects/Screenshot 2025-10-10 210817.png",
     tags: ["React", "Tailwind", "Node.js", "Khalti", "mongoDB", "express"],
     demoUrl: "https://shop-nest-kappa.vercel.app/",
@@ -34,7 +34,7 @@ const projects = [
     title: "DreamDock",
     category: "Job Portal",
     description:
-      "DreamDock is a modern job portal designed to bridge the gap between talent and opportunity. It offers an intuitive platform where job seekers can effortlessly discover and apply for their dream roles, while employers can post openings, manage applications, and find top candidates with ease. With smart search filters, personalized recommendations, and real-time application tracking, DreamDock makes the hiring process smoother, faster, and more efficient for everyone. ",
+      "DreamDock is a modern job portal designed to bridge the gap between talent and opportunity.",
     image: "/projects/job.png",
     tags: ["React", "Tailwind", "Node.js", "express", "ai"],
     demoUrl: "",
@@ -47,7 +47,7 @@ const projects = [
     title: "Chatify",
     category: "Communication",
     description:
-      "Chatify is a real-time communication platform that enables seamless messaging with friends, teams, and communities. It supports instant text, voice, and media sharing with robust end-to-end encryption to ensure privacy and data security. Designed for speed and reliability, Chatify offers features like typing indicators, online status, message reactions, and secure file transfers—making conversations fast, interactive, and protected.",
+      "Chatify is a real-time communication platform that enables seamless messaging with friends, teams, and communities.",
     image: "/projects/Screenshot 2025-10-10 211531.png",
     tags: ["Socket.IO", "MongoDB", "Express", "React"],
     demoUrl: "",
