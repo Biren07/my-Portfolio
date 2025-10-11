@@ -133,7 +133,7 @@ export const ContactSection = () => {
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Email</p>
                   <a
-                    href="dhamib610@gmail.com"
+                    href="mailto:dhamib610@gmail.com"
                     className="text-sm sm:text-base font-medium hover:text-primary transition-colors"
                   >
                     dhamib610@gmail.com
