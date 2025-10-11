@@ -142,7 +142,7 @@ export const Footer = () => {
             viewport={{ once: true }}
           >
             <div>
-              <p>© {currentYear} desgined by Birendra❤️</p>
+              <p>© {currentYear} Designed by Birendra❤️</p>
             </div>
             
             <div className="flex items-center space-x-6">

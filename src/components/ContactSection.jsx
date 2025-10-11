@@ -151,7 +151,7 @@ export const ContactSection = () => {
                     href="tel:+919315145594"
                     className="text-sm sm:text-base font-medium hover:text-primary transition-colors"
                   >
-                    +977 9841355789 , +977 9812723020
+                    +977 9841355789
                   </a>
                 </div>
               </div>
@@ -163,7 +163,7 @@ export const ContactSection = () => {
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Location</p>
                   <span className="text-sm sm:text-base font-medium">
-                    Kathmandhu, Nepal
+                    NewBaneshwor, Kathmandhu Nepal
                   </span>
                 </div>
               </div>
@@ -200,7 +200,7 @@ export const ContactSection = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="p-6 sm:p-8 rounded-xl sm:rounded-2xl bg-card border border-border shadow-sm">
+          {/* <div className="p-6 sm:p-8 rounded-xl sm:rounded-2xl bg-card border border-border shadow-sm">
             <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2">
               <span className="w-3 sm:w-4 h-3 sm:h-4 rounded-full bg-primary"></span>
               Send Me a Message
@@ -272,7 +272,7 @@ export const ContactSection = () => {
                 This is  not working 
               </button>
             </form>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

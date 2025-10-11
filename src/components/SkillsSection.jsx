@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 // Import your images
 import htmlIcon from "@/assets/icons/html.png";
 import cssIcon from "@/assets/icons/css.png";
-import sassIcon from "@/assets/icons/saas.png";
 import jsIcon from "@/assets/icons/javascript.png";
 import tsIcon from "@/assets/icons/typescript.png";
 import reactIcon from "@/assets/icons/react.png";
@@ -12,16 +11,12 @@ import nextjsIcon from "@/assets/icons/nextjs.png";
 import nodejsIcon from "@/assets/icons/nodejs.png";
 import expressIcon from "@/assets/icons/express.png";
 import mongodbIcon from "@/assets/icons/mongodb.png";
-import postgresqlIcon from "@/assets/icons/postgresql.png";
-import graphqlIcon from "@/assets/icons/graphql.png";
 import javaIcon from "@/assets/icons/java.png";
 import pythonIcon from "@/assets/icons/python.png";
 import gitIcon from "@/assets/icons/git.png";
 import githubIcon from "@/assets/icons/github.png";
-import dockerIcon from "@/assets/icons/docker.png";
 import firebaseIcon from "@/assets/icons/firebase.png";
 import vscodeIcon from "@/assets/icons/vscode.png";
-import clearkIcon from "@/assets/icons/cleark.png";
 import SQLIcon from "@/assets/icons/sql.png";
 import MySQLIcon from "@/assets/icons/mysql.png";
 
@@ -37,22 +32,24 @@ const skills = [
   // Backend
   { name: "Node.js", level: 90, category: "backend", icon: "nodejs" },
   { name: "Express", level: 85, category: "backend", icon: "express" },
-  { name: "MongoDB", level: 90, category: "backend", icon: "mongodb" },
   { name: "Java", level: 50, category: "backend", icon: "java" },
   { name: "Python", level: 50, category: "backend", icon: "python" },
-
+  //Database 
+   { name: "MongoDB", level: 90, category: "database", icon: "mongodb" },
+   { name: "SQL", level: 60, category: "database", icon: "sql" },
+   { name: "MySQL", level: 90, category: "database", icon: "mysql" },
   // Tools
   { name: "Git", level: 90, category: "tools", icon: "git" },
   { name: "GitHub", level: 90, category: "tools", icon: "github" },
   { name: "Firebase", level: 50, category: "tools", icon: "firebase" },
   { name: "VS Code", level: 95, category: "tools", icon: "vscode" },
-  { name: "SQL", level: 60, category: "tools", icon: "sql" },
-  { name: "MySQL", level: 90, category: "tools", icon: "mysql" },
+  
 ];
 
 const categories = [
   { id: "all", label: "All Skills", color: "bg-gradient-to-r from-purple-500 to-pink-500" },
   { id: "frontend", label: "Frontend", color: "bg-gradient-to-r from-blue-500 to-cyan-500" },
+  { id: "database", label: "database", color: "bg-gradient-to-r from-blue-500 to-cyan-500" },
   { id: "backend", label: "Backend", color: "bg-gradient-to-r from-green-500 to-emerald-500" },
   { id: "tools", label: "Tools", color: "bg-gradient-to-r from-orange-500 to-yellow-500" },
 ];
