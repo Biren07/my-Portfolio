@@ -37,7 +37,7 @@ const projects = [
       "DreamDock is a modern job portal designed to bridge the gap between talent and opportunity.",
     image: "/projects/job.png",
     tags: ["React", "Tailwind", "Node.js", "express", "ai"],
-    demoUrl: "",
+    demoUrl: "https://job-portal-website-2025.vercel.app/",
     githubUrl: "https://github.com/Biren07/Job-Portal-Website-2025.git",
     featured: true,
     accentColor: "from-purple-500 to-indigo-600",
