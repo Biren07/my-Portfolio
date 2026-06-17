@@ -8,15 +8,17 @@ import {
   ChevronDown,
   MoveRight,
 } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   motion,
   useScroll,
   useTransform,
   AnimatePresence,
 } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { getProjects } from "../services/api";
 
-const projects = [
+const defaultProjects = [
   {
     id: 7,
     title: "ShopNest",
@@ -58,21 +60,37 @@ const projects = [
 ];
 
 const categoryColors = {
-  "E-commerce":
-    "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
+  "Ecommerce":
+    "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200 border border-emerald-200/50 dark:border-emerald-800/30",
+  "Job Portal":
+    "bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-200 border border-purple-200/50 dark:border-purple-800/30",
   Communication:
-    "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-  "Artificial Intelligence":
-    "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
-  Finance:
-    "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200",
+    "bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200 border border-blue-200/50 dark:border-blue-800/30",
 };
 
 export const ProjectsSection = () => {
+  const [projectsList, setProjectsList] = useState(defaultProjects);
   const [showAll, setShowAll] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await getProjects();
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.length > 0) {
+            setProjectsList(data);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch projects from backend:", error);
+      }
+    };
+    fetchProjects();
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -88,8 +106,8 @@ export const ProjectsSection = () => {
 
   const filteredProjects =
     activeFilter === "All"
-      ? projects
-      : projects.filter((project) => project.category === activeFilter);
+      ? projectsList
+      : projectsList.filter((project) => project.category === activeFilter);
 
   const displayedProjects = showAll
     ? filteredProjects
@@ -155,6 +173,37 @@ export const ProjectsSection = () => {
             <div className="w-8 md:w-12 h-px bg-primary/50"></div>
           </motion.span>
         </motion.div>
+
+        {/* Project Filters */}
+        <div className="flex flex-wrap justify-center gap-3 mb-16 relative">
+          {["All", "Ecommerce", "Job Portal", "Communication"].map((category) => {
+            const isActive = activeFilter === category;
+            return (
+              <motion.button
+                key={category}
+                onClick={() => setActiveFilter(category)}
+                className={cn(
+                  "relative px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors z-10",
+                  isActive
+                    ? "text-white shadow-sm"
+                    : "bg-secondary/50 text-foreground hover:bg-secondary/70"
+                )}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="activeProjectCategory"
+                    className="absolute inset-0 bg-primary rounded-full -z-10"
+                    transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                  />
+                )}
+                {category}
+              </motion.button>
+            );
+          })}
+        </div>
+
         {/* Projects grid - Enhanced masonry layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
           <AnimatePresence>

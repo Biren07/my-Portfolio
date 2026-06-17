@@ -2,6 +2,8 @@ import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { Home } from "./pages/Home";
+import { Login } from "./pages/Login";
+import { AdminDashboard } from "./pages/AdminDashboard";
 import { NotFound } from "./pages/NotFound";
 import { Toaster } from "@/components/ui/toaster";
 import WelcomeScreen from "@/components/WelcomeScreen";
@@ -23,6 +25,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route index element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

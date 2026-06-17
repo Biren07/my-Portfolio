@@ -220,22 +220,34 @@ export const Navbar = () => {
       >
         <div className="flex items-center justify-center bg-white/80 dark:bg-black/80 backdrop-blur-md rounded-full shadow-lg p-2 border border-gray-200 dark:border-gray-700">
           <div className="flex space-x-1 items-center">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "p-2 rounded-full transition-colors flex flex-col items-center",
-                  activeSection === item.href
-                    ? "bg-primary text-white"
-                    : "text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
-                )}
-                aria-label={item.name}
-              >
-                <item.icon className="w-5 h-5" />
-                <span className="text-xs mt-1 hidden md:block">{item.name}</span>
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const isActive = activeSection === item.href;
+              return (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "relative p-2 md:px-4 md:py-2.5 rounded-full transition-colors flex flex-col items-center z-10",
+                    isActive
+                      ? "text-white"
+                      : "text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
+                  )}
+                  aria-label={item.name}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeNavTab"
+                      className="absolute inset-0 bg-primary rounded-full -z-10"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <item.icon className="w-5 h-5" />
+                  <span className="text-xs mt-0.5 hidden md:block">{item.name}</span>
+                </motion.a>
+              );
+            })}
             <div className="flex items-center px-2">
               <ThemeToggle />
             </div>

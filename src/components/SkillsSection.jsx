@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 // Import your images
 import htmlIcon from "@/assets/icons/html.png";
@@ -77,8 +78,9 @@ const SkillBar = ({ level }) => (
   <div className="w-full h-3 bg-secondary/20 rounded-full overflow-hidden">
     <motion.div
       initial={{ width: 0 }}
-      animate={{ width: `${level}%` }}
-      transition={{ duration: 1.5, delay: 0.2 }}
+      whileInView={{ width: `${level}%` }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.2, ease: "easeOut" }}
       className={`h-full rounded-full ${
         level > 75 ? 'bg-gradient-to-r from-green-400 to-emerald-500' : 
         level > 50 ? 'bg-gradient-to-r from-yellow-400 to-amber-500' : 
@@ -145,22 +147,33 @@ export const SkillsSection = () => {
           </h2>
         </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
-          {categories.map((category) => (
-            <motion.button
-              key={category.id}
-              onClick={() => setActiveCategory(category.id)}
-              className={`px-6 py-2.5 rounded-full font-medium border border-transparent hover:shadow-lg ${
-                activeCategory === category.id
-                  ? `${category.color} text-white shadow-md`
-                  : "bg-secondary/50 text-foreground hover:bg-secondary/70"
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {category.label}
-            </motion.button>
-          ))}
+        <div className="flex flex-wrap justify-center gap-3 mb-16 relative">
+          {categories.map((category) => {
+            const isActive = activeCategory === category.id;
+            return (
+              <motion.button
+                key={category.id}
+                onClick={() => setActiveCategory(category.id)}
+                className={cn(
+                  "relative px-6 py-2.5 rounded-full font-medium text-sm transition-colors z-10",
+                  isActive
+                    ? "text-white shadow-sm"
+                    : "bg-secondary/50 text-foreground hover:bg-secondary/70"
+                )}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="activeSkillCategory"
+                    className={cn("absolute inset-0 rounded-full -z-10", category.color)}
+                    transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                  />
+                )}
+                {category.label}
+              </motion.button>
+            );
+          })}
         </div>
 
         {activeCategory === "all" ? (

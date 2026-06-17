@@ -105,30 +105,27 @@ export const HeroSection = () => {
             </motion.span>
           </motion.h1>
 
-          <motion.p
-            className="text-lg sm:text-xl text-muted-foreground mt-6 leading-relaxed"
+          <motion.div
+            className="text-lg sm:text-xl text-muted-foreground mt-6 leading-relaxed flex flex-col items-center lg:items-start"
             initial={{ y: 30, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 0.8 }}
           >
-            I'm <span className="text-primary font-semibold">Birendra</span> — a
-            passionate 
-            <motion.div
-            className="text-xl sm:text-2xl font-medium text-primary mt-4 h-8"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.5 }}
-          >
-            <span>{text}</span>
-            <motion.span
-              className="inline-block w-1 bg-primary ml-1"
-              animate={{ opacity: [1, 0] }}
-              transition={{ duration: 0.8, repeat: Infinity }}
-            />
-          </motion.div> 
-          crafting sleek, fast, and scalable digital
-            experiences.
-          </motion.p>
+            <span>
+              I'm <span className="text-primary font-semibold">Birendra</span> — a passionate
+            </span>
+            <div className="text-xl sm:text-2xl font-bold text-primary mt-2 mb-2 h-8 flex items-center justify-center lg:justify-start">
+              <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">{text}</span>
+              <motion.span
+                className="inline-block w-1 h-6 bg-primary ml-1.5"
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+              />
+            </div>
+            <span>
+              crafting sleek, fast, and scalable digital experiences.
+            </span>
+          </motion.div>
 
           <motion.div
             className="flex flex-col sm:flex-row gap-4 mt-8 justify-center lg:justify-start"
@@ -164,8 +161,51 @@ export const HeroSection = () => {
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1 }}
         >
+          {/* Floating Badge 1 - Top Left */}
           <motion.div
-            className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-primary/30"
+            className="absolute -top-4 left-4 sm:-top-6 sm:left-6 md:-top-10 md:left-10 bg-white/90 dark:bg-black/70 backdrop-blur-md border border-gray-200 dark:border-gray-800 shadow-xl p-3 rounded-2xl flex items-center gap-3 z-20"
+            animate={{
+              y: [0, -10, 0],
+              x: [0, 5, 0]
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            whileHover={{ scale: 1.05 }}
+          >
+            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500 text-sm font-bold">🚀</div>
+            <div className="text-left">
+              <p className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Experience</p>
+              <p className="text-xs font-bold text-gray-800 dark:text-gray-200">3+ Years Coding</p>
+            </div>
+          </motion.div>
+
+          {/* Floating Badge 2 - Bottom Right */}
+          <motion.div
+            className="absolute -bottom-4 right-4 sm:-bottom-6 sm:right-6 md:-bottom-10 md:right-10 bg-white/90 dark:bg-black/70 backdrop-blur-md border border-gray-200 dark:border-gray-800 shadow-xl p-3 rounded-2xl flex items-center gap-3 z-20"
+            animate={{
+              y: [0, 10, 0],
+              x: [0, -5, 0]
+            }}
+            transition={{
+              duration: 5.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.5
+            }}
+            whileHover={{ scale: 1.05 }}
+          >
+            <div className="p-2 rounded-lg bg-purple-500/10 text-purple-500 text-sm font-bold">💼</div>
+            <div className="text-left">
+              <p className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Status</p>
+              <p className="text-xs font-bold text-gray-800 dark:text-gray-200">Open to Offers</p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-primary/30 z-10"
             whileHover={{ scale: 1.05, rotate: 2 }}
             transition={{ duration: 0.6 }}
           >
