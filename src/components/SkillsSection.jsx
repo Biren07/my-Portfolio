@@ -11,6 +11,7 @@ import reactIcon from "@/assets/icons/react.png";
 import nextjsIcon from "@/assets/icons/nextjs.png";
 import nodejsIcon from "@/assets/icons/nodejs.png";
 import expressIcon from "@/assets/icons/express.png";
+import nestjsIcon from "@/assets/icons/nestjs.svg";
 import mongodbIcon from "@/assets/icons/mongodb.png";
 import javaIcon from "@/assets/icons/java.png";
 import pythonIcon from "@/assets/icons/python.png";
@@ -18,8 +19,9 @@ import gitIcon from "@/assets/icons/git.png";
 import githubIcon from "@/assets/icons/github.png";
 import firebaseIcon from "@/assets/icons/firebase.png";
 import vscodeIcon from "@/assets/icons/vscode.png";
+import dockerIcon from "@/assets/icons/docker.png";
+import postgresqlIcon from "@/assets/icons/postgresql.png";
 import SQLIcon from "@/assets/icons/sql.png";
-import MySQLIcon from "@/assets/icons/mysql.png";
 
 const skills = [
   // Frontend
@@ -33,14 +35,16 @@ const skills = [
   // Backend
   { name: "Node.js", level: 90, category: "backend", icon: "nodejs" },
   { name: "Express", level: 85, category: "backend", icon: "express" },
+  { name: "NestJS", level: 80, category: "backend", icon: "nestjs" },
   { name: "Java", level: 50, category: "backend", icon: "java" },
   { name: "Python", level: 50, category: "backend", icon: "python" },
   //Database 
-   { name: "MongoDB", level: 90, category: "database", icon: "mongodb" },
-   { name: "MySQL", level: 90, category: "database", icon: "mysql" },
+  { name: "MongoDB", level: 90, category: "database", icon: "mongodb" },
+  { name: "PostgreSQL", level: 80, category: "database", icon: "postgresql" },
   // Tools
   { name: "Git", level: 90, category: "tools", icon: "git" },
   { name: "GitHub", level: 90, category: "tools", icon: "github" },
+  { name: "Docker", level: 75, category: "tools", icon: "docker" },
   { name: "Firebase", level: 50, category: "tools", icon: "firebase" },
   { name: "VS Code", level: 95, category: "tools", icon: "vscode" },
   
@@ -49,7 +53,7 @@ const skills = [
 const categories = [
   { id: "all", label: "All Skills", color: "bg-gradient-to-r from-purple-500 to-pink-500" },
   { id: "frontend", label: "Frontend", color: "bg-gradient-to-r from-blue-500 to-cyan-500" },
-  { id: "database", label: "database", color: "bg-gradient-to-r from-blue-500 to-cyan-500" },
+  { id: "database", label: "Database", color: "bg-gradient-to-r from-blue-500 to-cyan-500" },
   { id: "backend", label: "Backend", color: "bg-gradient-to-r from-green-500 to-emerald-500" },
   { id: "tools", label: "Tools", color: "bg-gradient-to-r from-orange-500 to-yellow-500" },
 ];
@@ -63,15 +67,17 @@ const iconImages = {
   nextjs: nextjsIcon,
   nodejs: nodejsIcon,
   express: expressIcon,
+  nestjs: nestjsIcon,
+  postgresql: postgresqlIcon,
   mongodb: mongodbIcon,
   java: javaIcon,
   python: pythonIcon,
   git: gitIcon,
   github: githubIcon,
+  docker: dockerIcon,
   firebase: firebaseIcon,
   vscode: vscodeIcon,
   sql: SQLIcon,
-  mysql: MySQLIcon,
 };
 
 const SkillBar = ({ level }) => (

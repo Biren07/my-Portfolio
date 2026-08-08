@@ -1,272 +1,201 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
-import { useTheme } from "next-themes";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles, Terminal, Code2, Cpu, ArrowRight, Zap } from "lucide-react";
 
-const WelcomeScreen = ({ onWelcomeComplete }) => {
-  const [phase, setPhase] = useState(0);
-  const [exitAnimation, setExitAnimation] = useState(false);
-  const [typedText, setTypedText] = useState("");
-  const { theme } = useTheme();
+export const WelcomeScreen = ({ onWelcomeComplete }) => {
+  const [progress, setProgress] = useState(0);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [isExiting, setIsExiting] = useState(false);
 
-  // Theme-based colors
-  const colors = {
-    light: {
-      primary: "hsl(222.2 47.4% 11.2%)",
-      secondary: "hsl(262.1 83.3% 57.8%)",
-      background: "hsl(0 0% 100%)",
-      muted: "hsl(215.4 16.3% 46.9%)",
-      link: "hsl(221.2 83.2% 53.3%)"
-    },
-    dark: {
-      primary: "hsl(210 40% 98%)",
-      secondary: "hsl(263.4 70% 50.4%)",
-      background: "hsl(222.2 47.4% 11.2%)",
-      muted: "hsl(215 20.2% 65.1%)",
-      link: "hsl(217.2 91.2% 59.8%)"
-    }
-  };
-
-  const currentColors = colors[theme] || colors.dark;
-  const portfolioUrl = "Welcome my portfolio website.";
-  const welcomeMessages = [
-    "Frontend developer",
-    "Software Engineer",
-    "Mern Stack developer"
+  const steps = [
+    { text: "Initializing Core Systems...", icon: Cpu },
+    { text: "Compiling Full-Stack Modules...", icon: Code2 },
+    { text: "Connecting APIs & Database...", icon: Terminal },
+    { text: "Welcome to Birendra's Portfolio", icon: Sparkles },
   ];
 
   useEffect(() => {
-    const phase1 = setTimeout(() => setPhase(1), 800);
-    const phase2 = setTimeout(() => setPhase(2), 1600);
-    const phase3 = setTimeout(() => setPhase(3), 2400);
-    const complete = setTimeout(() => {
-      setExitAnimation(true);
-      setTimeout(onWelcomeComplete, 1000);
-    }, 5000);
+    // Progress counter animation
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        const increment = Math.floor(Math.random() * 9) + 5;
+        return Math.min(prev + increment, 100);
+      });
+    }, 85);
 
-    return () => {
-      clearTimeout(phase1);
-      clearTimeout(phase2);
-      clearTimeout(phase3);
-      clearTimeout(complete);
-    };
-  }, [onWelcomeComplete]);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
-    if (phase >= 2) {
-      let i = 0;
-      const typingInterval = setInterval(() => {
-        if (i <= portfolioUrl.length) {
-          setTypedText(portfolioUrl.substring(0, i));
-          i++;
-        } else {
-          clearInterval(typingInterval);
-        }
-      }, 40);
+    if (progress < 25) setCurrentStep(0);
+    else if (progress < 60) setCurrentStep(1);
+    else if (progress < 90) setCurrentStep(2);
+    else setCurrentStep(3);
 
-      return () => clearInterval(typingInterval);
-    }
-  }, [phase]);
+    if (progress >= 100) {
+      const exitTimer = setTimeout(() => {
+        setIsExiting(true);
+        setTimeout(() => {
+          if (onWelcomeComplete) onWelcomeComplete();
+        }, 800);
+      }, 500);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3
-      }
-    },
-    exit: {
-      y: "-100vh",
-      opacity: 0,
-      transition: {
-        duration: 1,
-        ease: [0.16, 1, 0.3, 1]
-      }
+      return () => clearTimeout(exitTimer);
     }
+  }, [progress, onWelcomeComplete]);
+
+  const handleSkip = () => {
+    setIsExiting(true);
+    setTimeout(() => {
+      if (onWelcomeComplete) onWelcomeComplete();
+    }, 450);
   };
 
-  const contentVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1]
-      }
-    }
-  };
-
-  const underlineVariants = {
-    hidden: { scaleX: 0 },
-    visible: {
-      scaleX: 1,
-      transition: {
-        delay: 0.8,
-        duration: 0.6,
-        ease: [0.16, 1, 0.3, 1]
-      }
-    }
-  };
-
-  const cursorVariants = {
-    blinking: {
-      opacity: [0, 0, 1, 1],
-      transition: {
-        duration: 1,
-        repeat: Infinity,
-        repeatDelay: 0
-      }
-    }
-  };
+  const StepIcon = steps[currentStep]?.icon || Sparkles;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden">
-      {/* Welcome Screen */}
-      <motion.div
-        className="h-full w-full flex items-center justify-center p-4"
-        style={{ backgroundColor: currentColors.background }}
-        variants={containerVariants}
-        initial="hidden"
-        animate={exitAnimation ? "exit" : "visible"}
-      >
-        {/* Animated background elements - scaled down for mobile */}
-        <motion.div className="absolute inset-0 -z-10 overflow-hidden opacity-20">
-          <motion.div 
-            className="absolute top-1/4 left-1/4 w-32 h-32 md:w-64 md:h-64 rounded-full blur-[50px] md:blur-[100px]"
-            style={{ 
-              background: `linear-gradient(to right, ${currentColors.primary}, ${currentColors.secondary})`
-            }}
-            animate={{
-              x: [0, 20, 0],
-              y: [0, -30, 0],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              repeatType: 'reverse',
-              ease: 'easeInOut'
-            }}
-          />
-          <motion.div 
-            className="absolute top-1/3 right-1/4 w-36 h-36 md:w-72 md:h-72 rounded-full blur-[60px] md:blur-[120px]"
-            style={{ 
-              background: `linear-gradient(to right, ${currentColors.secondary}, #ec4899)`
-            }}
-            animate={{
-              x: [0, -30, 0],
-              y: [0, 40, 0],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              repeatType: 'reverse',
-              ease: 'easeInOut'
-            }}
-          />
-        </motion.div>
+    <AnimatePresence>
+      {!isExiting && (
+        <motion.div
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#070913] text-foreground overflow-hidden select-none px-4 sm:px-6 h-[100dvh]"
+          initial={{ opacity: 1 }}
+          exit={{
+            opacity: 0,
+            scale: 1.04,
+            filter: "blur(12px)",
+            transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+          }}
+        >
+          {/* Ambient Multi-color Glowing Orbs */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <motion.div
+              className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[500px] h-[320px] sm:h-[500px] rounded-full bg-gradient-to-tr from-primary/35 via-purple-600/25 to-pink-500/15 blur-[100px] sm:blur-[140px]"
+              animate={{
+                scale: [1, 1.15, 1],
+                opacity: [0.5, 0.8, 0.5],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </div>
 
-        <div className="w-full max-w-2xl mx-auto text-center px-4">
-          <motion.div className="space-y-4 md:space-y-8">
-            {phase >= 0 && (
-              <motion.div variants={contentVariants}>
-                <motion.div 
-                  className="text-sm md:text-lg lg:text-xl font-mono mb-2 md:mb-4 inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-2 rounded-full border"
-                  style={{
-                    color: currentColors.primary,
-                    backgroundColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
-                    borderColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
-                  }}
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                >
-                  <Sparkles className="h-3 w-3 md:h-4 md:w-4" />
-                  {welcomeMessages[phase % welcomeMessages.length]}
-                </motion.div>
-              </motion.div>
-            )}
+          {/* Background Tech Grid Pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f293718_1px,transparent_1px),linear-gradient(to_bottom,#1f293718_1px,transparent_1px)] bg-[size:3rem_3rem] sm:bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
-            {phase >= 1 && (
-              <motion.h1 
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-tight"
-                style={{ color: currentColors.primary }}
-                variants={contentVariants}
-              >
-                <span className="inline-block">Hello</span>
-                <motion.span 
-                  className="inline-block ml-2 sm:ml-3 relative"
-                  style={{ color: currentColors.secondary }}
-                  variants={contentVariants}
-                >
-                  There !
-                  <motion.span 
-                    className="absolute -bottom-1 sm:-bottom-2 left-0 h-0.5 sm:h-1 w-full"
-                    style={{ backgroundColor: currentColors.secondary }}
-                    variants={underlineVariants}
+          {/* Main Card / Container */}
+          <div className="relative w-full max-w-md mx-auto flex flex-col items-center text-center z-10 py-4">
+            {/* Glowing Logo Monogram */}
+            <motion.div
+              className="relative mb-5 sm:mb-7"
+              initial={{ scale: 0.75, opacity: 0, y: -20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="relative p-[2.5px] rounded-3xl bg-gradient-to-tr from-primary via-purple-500 to-pink-500 shadow-[0_0_50px_-10px_rgba(168,85,247,0.65)]">
+                <div className="w-18 h-18 sm:w-24 sm:h-24 rounded-[1.35rem] bg-[#0B0F19] flex items-center justify-center border border-white/10 backdrop-blur-xl">
+                  <span className="font-mono text-2xl sm:text-3xl font-black bg-gradient-to-br from-white via-primary to-purple-400 bg-clip-text text-transparent tracking-tighter">
+                    &lt;BD/&gt;
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Name and Role */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, duration: 0.6 }}
+              className="mb-5 sm:mb-7"
+            >
+              <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white mb-1.5">
+                BIRENDRA SINGH DHAMI
+              </h1>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[11px] sm:text-xs font-semibold text-primary">
+                <Zap className="h-3 w-3 text-primary animate-pulse" />
+                <span>Full Stack Developer || MERN Stack</span>
+              </div>
+            </motion.div>
+
+            {/* Terminal Boot Sequence Card */}
+            <motion.div
+              className="w-full bg-[#0D121F]/90 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 sm:p-5 shadow-2xl text-left relative mb-5 sm:mb-6 overflow-hidden"
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.7 }}
+            >
+              {/* Terminal Header */}
+              <div className="flex items-center justify-between pb-3 mb-3.5 border-b border-white/10 text-xs text-muted-foreground font-mono">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+                  <span className="ml-2 text-[10px] sm:text-[11px] text-gray-400">
+                    birendra@portfolio:~
+                  </span>
+                </div>
+                <div className="text-[9px] sm:text-[10px] text-emerald-400 font-bold flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  SYSTEM READY
+                </div>
+              </div>
+
+              {/* Step indicator */}
+              <div className="flex items-center gap-2.5 mb-3.5 min-h-[30px]">
+                <div className="p-1.5 rounded-lg bg-primary/15 text-primary shrink-0">
+                  <StepIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </div>
+                <div className="text-xs sm:text-sm font-mono text-gray-200 truncate">
+                  <span className="text-primary mr-1">&gt;</span>
+                  {steps[currentStep]?.text}
+                </div>
+              </div>
+
+              {/* Progress Bar & Percentage */}
+              <div className="space-y-1.5">
+                <div className="flex justify-between items-center text-xs font-mono">
+                  <span className="text-muted-foreground text-[10px] sm:text-[11px]">
+                    Boot Sequence
+                  </span>
+                  <span className="text-primary font-bold text-[11px] sm:text-xs">
+                    {progress}%
+                  </span>
+                </div>
+                <div className="relative h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/10">
+                  <motion.div
+                    className="h-full bg-gradient-to-r from-primary via-purple-500 to-pink-500 rounded-full"
+                    style={{ width: `${progress}%` }}
+                    transition={{ ease: "easeOut" }}
                   />
-                </motion.span>
-              </motion.h1>
-            )}
+                </div>
+              </div>
+            </motion.div>
 
-            {phase >= 2 && (
-              <motion.div 
-                className="text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed font-light"
-                style={{ color: currentColors.muted }}
-                variants={contentVariants}
-              >
-                <motion.div 
-                  className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg font-mono flex justify-center items-center"
-                  style={{ color: currentColors.link }}
-                >
-                  {typedText}
-                  {phase >= 2 && (
-                    <motion.span 
-                      className="ml-0.5 h-4 sm:h-5 md:h-6 w-0.5 sm:w-1 inline-block"
-                      style={{ backgroundColor: currentColors.link }}
-                      variants={cursorVariants}
-                      animate="blinking"
-                    />
-                  )}
-                </motion.div>
-               
-              </motion.div>
-            )}
-
-            {phase >= 3 && (
-              <motion.div 
-                className="pt-4 sm:pt-6 md:pt-8"
-                variants={contentVariants}
-              >
-                <motion.div 
-                  className="h-1 sm:h-2 w-16 sm:w-20 rounded-full mx-auto"
-                  style={{ backgroundColor: currentColors.secondary + '80' }}
-                  animate={{
-                    scaleX: [1, 1.5, 1],
-                    opacity: [1, 0.7, 1]
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity
-                  }}
-                />
-                <motion.p 
-                  className="mt-2 sm:mt-4 text-xs sm:text-sm opacity-70"
-                  style={{ color: currentColors.muted }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  Loading my best work for you...
-                </motion.p>
-              </motion.div>
-            )}
-          </motion.div>
-        </div>
-      </motion.div>
-    </div>
+            {/* Skip Intro Button */}
+            <motion.button
+              onClick={handleSkip}
+              className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs font-medium text-muted-foreground hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 active:scale-95 transition-all duration-300 cursor-pointer"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span>Enter Portfolio</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </motion.button>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
 export default WelcomeScreen;
+

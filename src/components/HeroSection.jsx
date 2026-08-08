@@ -8,9 +8,8 @@ export const HeroSection = () => {
 
 
   const roles = [
+    "Full Stack Developer",
     "MERN Stack Developer",
-    "Frontend Developer",
-    "Backend Developer",
     "Creative Coder",
   ];
   const [text, setText] = useState("");
@@ -89,7 +88,7 @@ export const HeroSection = () => {
           </motion.div>
 
           <motion.h1
-            className="text-5xl sm:text-6xl md:text-7xl font-black leading-tight tracking-tight"
+            className="text-4xl sm:text-6xl md:text-7xl font-black leading-tight tracking-tight"
             initial={{ y: 30, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 0.8 }}
@@ -163,10 +162,10 @@ export const HeroSection = () => {
         >
           {/* Floating Badge 1 - Top Left */}
           <motion.div
-            className="absolute -top-4 left-4 sm:-top-6 sm:left-6 md:-top-10 md:left-10 bg-white/90 dark:bg-black/70 backdrop-blur-md border border-gray-200 dark:border-gray-800 shadow-xl p-3 rounded-2xl flex items-center gap-3 z-20"
+            className="absolute -top-4 -left-2 sm:-top-6 sm:left-2 md:-top-8 md:left-4 bg-background/80 dark:bg-black/70 backdrop-blur-xl border border-primary/20 shadow-2xl p-3 rounded-2xl flex items-center gap-3 z-20 hover:border-primary/50 transition-colors"
             animate={{
-              y: [0, -10, 0],
-              x: [0, 5, 0]
+              y: [0, -8, 0],
+              x: [0, 4, 0]
             }}
             transition={{
               duration: 5,
@@ -175,19 +174,19 @@ export const HeroSection = () => {
             }}
             whileHover={{ scale: 1.05 }}
           >
-            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500 text-sm font-bold">🚀</div>
+            <div className="p-2 rounded-xl bg-emerald-500/15 text-emerald-400 text-sm font-bold shadow-inner">🚀</div>
             <div className="text-left">
-              <p className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Experience</p>
-              <p className="text-xs font-bold text-gray-800 dark:text-gray-200">3+ Years Coding</p>
+              <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-bold">Experience</p>
+              <p className="text-xs font-bold text-foreground">2+ Years Coding</p>
             </div>
           </motion.div>
 
           {/* Floating Badge 2 - Bottom Right */}
           <motion.div
-            className="absolute -bottom-4 right-4 sm:-bottom-6 sm:right-6 md:-bottom-10 md:right-10 bg-white/90 dark:bg-black/70 backdrop-blur-md border border-gray-200 dark:border-gray-800 shadow-xl p-3 rounded-2xl flex items-center gap-3 z-20"
+            className="absolute -bottom-4 -right-2 sm:-bottom-6 sm:right-2 md:-bottom-8 md:right-4 bg-background/80 dark:bg-black/70 backdrop-blur-xl border border-primary/20 shadow-2xl p-3 rounded-2xl flex items-center gap-3 z-20 hover:border-primary/50 transition-colors"
             animate={{
-              y: [0, 10, 0],
-              x: [0, -5, 0]
+              y: [0, 8, 0],
+              x: [0, -4, 0]
             }}
             transition={{
               duration: 5.5,
@@ -197,29 +196,38 @@ export const HeroSection = () => {
             }}
             whileHover={{ scale: 1.05 }}
           >
-            <div className="p-2 rounded-lg bg-purple-500/10 text-purple-500 text-sm font-bold">💼</div>
+            <div className="p-2 rounded-xl bg-purple-500/15 text-purple-400 text-sm font-bold shadow-inner">🏢</div>
             <div className="text-left">
-              <p className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Status</p>
-              <p className="text-xs font-bold text-gray-800 dark:text-gray-200">Open to Offers</p>
+              <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-bold">Full Stack Developer</p>
+              <p className="text-xs font-bold text-foreground flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse inline-block" />
+                JavTech Infosys • Sanepa
+              </p>
             </div>
           </motion.div>
 
+          {/* Main Professional Avatar Container */}
           <motion.div
-            className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-primary/30 z-10"
-            whileHover={{ scale: 1.05, rotate: 2 }}
-            transition={{ duration: 0.6 }}
+            className="relative p-[3px] rounded-full sm:rounded-[2.5rem] bg-gradient-to-tr from-primary via-purple-500 to-pink-500 shadow-[0_0_50px_-8px_rgba(168,85,247,0.45)] z-10 group"
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.4 }}
           >
-            <img
-              src="/Birendra Dhami.png"
-              alt="Birendra"
-              className="w-full h-full object-cover"
-            />
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full sm:rounded-[2.35rem] overflow-hidden bg-muted/30 backdrop-blur-sm border border-white/10 shadow-2xl">
+              <img
+                src="/Birendra Dhami.png"
+                alt="Birendra Singh Dhami"
+                className="w-full h-full object-cover object-top filter contrast-[1.04] saturate-[1.04] group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
+              {/* Subtle gradient vignette to blend bottom seamlessly */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent pointer-events-none" />
+            </div>
           </motion.div>
 
+          {/* Dynamic Ambient Background Glow */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-primary/30 to-purple-600/30 rounded-full blur-3xl -z-10"
-            animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
-            transition={{ duration: 4, repeat: Infinity }}
+            className="absolute inset-0 bg-gradient-to-r from-primary/30 via-purple-600/25 to-pink-500/20 rounded-full sm:rounded-[2.5rem] blur-3xl -z-10"
+            animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.8, 0.5] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           />
         </motion.div>
       </div>

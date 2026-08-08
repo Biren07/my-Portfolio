@@ -2,11 +2,10 @@ import {
   ArrowRight,
   ExternalLink,
   Github,
-  ChevronUp,
-  Star,
-  Code,
-  ChevronDown,
-  MoveRight,
+  Sparkles,
+  Layers,
+  Globe,
+  Radio,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import {
@@ -20,59 +19,101 @@ import { getProjects } from "../services/api";
 
 const defaultProjects = [
   {
-    id: 7,
-    title: "ShopNest",
-    category: "Ecommerce",
-    description: "ShopNest is a dynamic multi-vendor eCommerce platform that connects customers with a wide range of sellers in one convenient marketplace.",
-    image: "/projects/Screenshot 2025-10-10 210817.png",
-    tags: ["React", "Tailwind", "Node.js", "Khalti", "mongoDB", "express"],
-    demoUrl: "https://shop-nest-kappa.vercel.app/",
-    githubUrl: "https://github.com/Biren07/ShopNest.git",
-    featured: true,
-    accentColor: "from-emerald-500 to-teal-600",
-  },
-  {
     id: 1,
-    title: "DreamDock",
-    category: "Job Portal",
+    title: "New Bishwakarma Sun Chadi Pasal",
+    category: "Ecommerce",
     description:
-      "DreamDock is a modern job portal designed to bridge the gap between talent and opportunity.",
-    image: "/projects/job.png",
-    tags: ["React", "Tailwind", "Node.js", "express", "ai"],
-    demoUrl: "https://job-portal-website-2025.vercel.app/",
-    githubUrl: "https://github.com/Biren07/Job-Portal-Website-2025.git",
+      "A premium Nepali jewelry eCommerce platform featuring real-time 24K gold & silver daily rates, bridal collection showcases, and BIS hallmarked certification.",
+    image: "/projects/gold.png",
+    tags: ["Next.js", "React", "Tailwind CSS", "MongoDB", "E-Commerce"],
+    demoUrl: "https://bishwakarma-sun-chadi-pasal-vzpo-livid.vercel.app/",
+    githubUrl: "https://github.com/Biren07",
     featured: true,
-    accentColor: "from-purple-500 to-indigo-600",
+    accentColor: "from-amber-500 via-yellow-500 to-amber-600",
   },
   {
     id: 2,
-    title: "Chatify",
+    title: "ShopNest Multi-Vendor",
+    category: "Ecommerce",
+    description:
+      "A scalable multi-vendor marketplace connecting customers with verified vendors, complete with shopping cart, merchant dashboard, and Khalti payment gateway.",
+    image: "/projects/Screenshot 2025-10-10 210817.png",
+    tags: ["React", "Tailwind", "Node.js", "Khalti", "MongoDB", "Express"],
+    demoUrl: "https://shop-nest-kappa.vercel.app/",
+    githubUrl: "https://github.com/Biren07/ShopNest.git",
+    featured: true,
+    accentColor: "from-emerald-500 via-teal-500 to-cyan-600",
+  },
+  {
+    id: 3,
+    title: "DreamDock Job Portal",
+    category: "Job Portal",
+    description:
+      "A modern career hub bridging recruiters and top talent with instant job applications, candidate resume screening, and role filtering.",
+    image: "/projects/job.png",
+    tags: ["React", "Tailwind", "Node.js", "Express", "MongoDB", "AI"],
+    demoUrl: "https://job-portal-website-2025.vercel.app/",
+    githubUrl: "https://github.com/Biren07/Job-Portal-Website-2025.git",
+    featured: true,
+    accentColor: "from-purple-500 via-indigo-500 to-pink-500",
+  },
+  {
+    id: 4,
+    title: "Chatify Instant Messenger",
     category: "Communication",
     description:
-      "Chatify is a real-time communication platform that enables seamless messaging with friends, teams, and communities.",
+      "A real-time instant messaging web application powered by Socket.IO for low-latency chat, online presence tracking, and sleek glassmorphism UI.",
     image: "/projects/Screenshot 2025-10-10 211531.png",
-    tags: ["Socket.IO", "MongoDB", "Express", "React"],
-    demoUrl: "",
+    tags: ["Socket.IO", "MongoDB", "Express", "React", "Tailwind"],
+    demoUrl: "https://chat-application-iota-black.vercel.app/",
     githubUrl: "https://github.com/Biren07/chat-application.git",
-    featured: true,
-    accentColor: "from-blue-500 to-cyan-600",
+    featured: false,
+    accentColor: "from-blue-500 via-cyan-500 to-indigo-600",
+  },
+  {
+    id: 5,
+    title: "Agrovet & Agri-Care",
+    category: "Management",
+    description:
+      "An agricultural product and supply management system for tracking inventory, farming fertilizers, seeds, and farmer consultation services.",
+    image: "/projects/agrovet.png",
+    tags: ["React", "Node.js", "Express", "MongoDB", "Tailwind"],
+    demoUrl: "https://agrovet-system.vercel.app/",
+    githubUrl: "https://github.com/Biren07",
+    featured: false,
+    accentColor: "from-emerald-600 via-green-500 to-teal-600",
+  },
+  {
+    id: 6,
+    title: "Khabar Hub - News Portal",
+    category: "News & Media",
+    description:
+      "A fast, modern digital news portal featuring breaking news tickers, category-wise feeds, search filtering, and responsive article layouts.",
+    image: "/projects/news.png",
+    tags: ["React", "Node.js", "Tailwind", "REST API"],
+    demoUrl: "https://news-portal-ashy-iota.vercel.app/",
+    githubUrl: "https://github.com/Biren07",
+    featured: false,
+    accentColor: "from-rose-500 via-red-500 to-pink-600",
   },
 ];
 
-const categoryColors = {
-  "Ecommerce":
-    "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200 border border-emerald-200/50 dark:border-emerald-800/30",
+const categoryBadgeStyles = {
+  Ecommerce:
+    "bg-amber-500/10 text-amber-500 border-amber-500/20 dark:bg-amber-500/15",
   "Job Portal":
-    "bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-200 border border-purple-200/50 dark:border-purple-800/30",
+    "bg-purple-500/10 text-purple-400 border-purple-500/20 dark:bg-purple-500/15",
   Communication:
-    "bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200 border border-blue-200/50 dark:border-blue-800/30",
+    "bg-blue-500/10 text-blue-400 border-blue-500/20 dark:bg-blue-500/15",
+  Management:
+    "bg-emerald-500/10 text-emerald-400 border-emerald-500/20 dark:bg-emerald-500/15",
+  "News & Media":
+    "bg-rose-500/10 text-rose-400 border-rose-500/20 dark:bg-rose-500/15",
 };
 
 export const ProjectsSection = () => {
   const [projectsList, setProjectsList] = useState(defaultProjects);
-  const [showAll, setShowAll] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
-  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -104,275 +145,286 @@ export const ProjectsSection = () => {
     [0.1, 0.15, 0.1]
   );
 
+  const categories = [
+    "All",
+    ...Array.from(new Set(projectsList.map((p) => p.category))),
+  ];
+
   const filteredProjects =
     activeFilter === "All"
       ? projectsList
       : projectsList.filter((project) => project.category === activeFilter);
 
-  const displayedProjects = showAll
-    ? filteredProjects
-    : filteredProjects.slice(0, 3);
   return (
     <section
       id="projects"
-      className="relative py-16 md:py-24 lg:py-32 overflow-hidden"
+      className="relative py-20 md:py-28 lg:py-36 overflow-hidden bg-background"
       ref={sectionRef}
     >
-      {/* Animated background elements */}
+      {/* Dynamic ambient radial gradients */}
       <motion.div
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 -z-10 pointer-events-none"
         style={{ y: yBg, opacity: opacityBg }}
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent"></div>
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-primary/10 via-purple-500/5 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 right-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
       </motion.div>
 
-      {/* Floating animated orbs */}
-      <motion.div
-        className="absolute -top-20 -left-20 w-72 h-72 md:w-96 md:h-96 rounded-full bg-primary/10 blur-3xl"
-        animate={{
-          x: [-20, 20, -20],
-          y: [-10, 10, -10],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className="absolute -bottom-20 -right-20 w-72 h-72 md:w-96 md:h-96 rounded-full bg-secondary/10 blur-3xl"
-        animate={{
-          x: [20, -20, 20],
-          y: [10, -10, 10],
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative">
-        {/* Section header with animation */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
+        {/* Section Header */}
         <motion.div
-          className="text-center mb-12 md:mb-20"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-center max-w-3xl mx-auto mb-14 md:mb-20"
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: "-40px" }}
         >
-          <motion.span
-            className="inline-flex items-center gap-2 text-xs font-medium tracking-widest text-primary/80 uppercase mb-4 md:mb-6"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            viewport={{ once: true }}
+          <motion.div
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider mb-4"
+            whileHover={{ scale: 1.05 }}
           >
-            <div className="w-8 md:w-12 h-px bg-primary/50"></div>
-            <h1 className="text-xl"> PROJECT PORTFOLIO</h1>
-            <div className="w-8 md:w-12 h-px bg-primary/50"></div>
-          </motion.span>
+            <Sparkles className="h-3.5 w-3.5" /> Featured Works & Systems
+          </motion.div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-4 text-foreground">
+            Crafted for <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">Scale & Experience</span>
+          </h2>
+
+          <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+            Explore full-stack applications with responsive interfaces, robust backend APIs, secure payments, and modern cloud deployment.
+          </p>
+
+          {/* Quick Metrics Bar */}
+          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 mt-8 pt-6 border-t border-border/50 text-xs font-medium text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>100% Live Production Demos</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Layers className="h-4 w-4 text-primary" />
+              <span>Full-Stack Architecture</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Globe className="h-4 w-4 text-purple-400" />
+              <span>Modern Cloud Deployments</span>
+            </div>
+          </div>
         </motion.div>
 
-        {/* Project Filters */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16 relative">
-          {["All", "Ecommerce", "Job Portal", "Communication"].map((category) => {
-            const isActive = activeFilter === category;
-            return (
-              <motion.button
-                key={category}
-                onClick={() => setActiveFilter(category)}
-                className={cn(
-                  "relative px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors z-10",
-                  isActive
-                    ? "text-white shadow-sm"
-                    : "bg-secondary/50 text-foreground hover:bg-secondary/70"
-                )}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {isActive && (
-                  <motion.span
-                    layoutId="activeProjectCategory"
-                    className="absolute inset-0 bg-primary rounded-full -z-10"
-                    transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                  />
-                )}
-                {category}
-              </motion.button>
-            );
-          })}
+        {/* Project Filter Tabs */}
+        <div className="flex justify-center mb-14">
+          <div className="inline-flex flex-wrap justify-center gap-2 p-1.5 rounded-2xl bg-muted/40 backdrop-blur-lg border border-border/60 shadow-inner">
+            {categories.map((category) => {
+              const isActive = activeFilter === category;
+              return (
+                <button
+                  key={category}
+                  onClick={() => setActiveFilter(category)}
+                  className={cn(
+                    "relative px-4 sm:px-5 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all duration-300 z-10",
+                    isActive
+                      ? "text-primary-foreground shadow-md font-bold"
+                      : "text-muted-foreground hover:text-foreground hover:bg-background/40"
+                  )}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeFilterPill"
+                      className="absolute inset-0 bg-gradient-to-r from-primary to-purple-600 rounded-xl -z-10 shadow-sm"
+                      transition={{ type: "spring", stiffness: 380, damping: 28 }}
+                    />
+                  )}
+                  {category}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Projects grid - Enhanced masonry layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+        {/* Projects Grid - 2 columns on mobile & tablets, 3 columns on large screens */}
+        <motion.div
+          layout
+          className="grid grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6 md:gap-8"
+        >
           <AnimatePresence>
-            {displayedProjects.map((project) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4 }}
-                className="group relative overflow-hidden rounded-xl bg-card border border-muted/20 hover:border-primary/30 transition-all duration-500 hover:shadow-lg"
-              >
-                {/* Gradient accent */}
-                <div
-                  className={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${project.accentColor}`}
-                ></div>
+            {filteredProjects.map((project) => {
+              const isLive = project.demoUrl && project.demoUrl.startsWith("http");
 
-                {/* Featured badge */}
-                {project.featured && (
-                  <motion.div
-                    className="absolute top-4 right-4 bg-gradient-to-br from-amber-400 to-amber-600 text-amber-900 px-2.5 py-1 rounded-full text-[0.7rem] font-bold flex items-center z-10 shadow-md"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.2 }}
-                  ></motion.div>
-                )}
-
-                {/* Project image with hover effect */}
-                <div className="h-52 sm:h-56 overflow-hidden relative">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex items-end p-5">
-                    <motion.p
-                      className="text-white/90 text-sm translate-y-5 group-hover:translate-y-0 transition-transform duration-500"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      {project.description}
-                    </motion.p>
-                  </div>
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
+              return (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4 }}
+                  whileHover={{ y: -5 }}
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl bg-card/60 dark:bg-card/40 backdrop-blur-xl border border-border/60 hover:border-primary/40 transition-all duration-500 shadow-md hover:shadow-2xl hover:shadow-primary/10"
+                >
+                  {/* Glowing Top Accent Bar */}
+                  <div
+                    className={cn(
+                      "absolute inset-x-0 top-0 h-1 bg-gradient-to-r transition-opacity duration-300 opacity-80 group-hover:opacity-100",
+                      project.accentColor
+                    )}
                   />
-                </div>
 
-                {/* Project content */}
-                <div className="p-5 pt-3">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                      {project.title}
-                    </h3>
-                    <span
-                      className={`text-xs font-medium px-2 py-1 rounded ${
-                        categoryColors[project.category] ||
-                        "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200"
-                      }`}
-                    >
-                      {project.category}
-                    </span>
-                  </div>
-
-                  {/* Tech tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {project.tags.map((tag, index) => (
-                      <motion.span
-                        key={index}
-                        whileHover={{ scale: 1.05 }}
-                        className={`px-2 py-0.5 text-[0.7rem] font-medium rounded-full ${
-                          tag.includes("Coming")
-                            ? "bg-destructive/10 text-destructive border border-destructive/20"
-                            : "bg-muted/80 text-foreground/80 hover:bg-primary hover:text-primary-foreground"
-                        } transition-colors duration-300`}
-                      >
-                        {tag}
-                      </motion.span>
-                    ))}
-                  </div>
-
-                  {/* Action buttons */}
-                  <div className="flex justify-between items-center border-t border-muted/20 pt-3">
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-1.5 text-sm font-medium ${
-                        project.demoUrl === "#"
-                          ? "text-muted-foreground cursor-not-allowed"
-                          : "text-foreground/80 hover:text-primary group"
-                      } transition-colors duration-300`}
-                      onClick={(e) =>
-                        project.demoUrl === "#" && e.preventDefault()
-                      }
-                    >
-                      <ExternalLink size={15} />
-                      {project.demoUrl === "#" ? "Coming Soon" : "Live Demo"}
-                      <MoveRight
-                        size={13}
-                        className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300"
+                  {/* Thumbnail / Image Area */}
+                  <div>
+                    <div className="relative aspect-[16/10] overflow-hidden bg-muted/40 border-b border-border/40">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                        loading="lazy"
+                        onError={(e) => {
+                          e.target.src = "/Birendra Dhami.png";
+                        }}
                       />
-                    </a>
+
+                      {/* Subtle hover gradient vignette */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
+
+                      {/* Live Demo Status Pill on Image */}
+                      <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10">
+                        {isLive ? (
+                          <div className="inline-flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-black/75 backdrop-blur-md border border-emerald-500/40 text-emerald-400 text-[9px] sm:text-[10px] font-bold shadow-md">
+                            <Radio className="h-2.5 w-2.5 sm:h-3 sm:w-3 animate-pulse text-emerald-400" />
+                            <span className="hidden xs:inline sm:inline">Live App</span>
+                            <span className="xs:hidden sm:hidden">Live</span>
+                          </div>
+                        ) : (
+                          <div className="inline-flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-muted-foreground text-[9px] sm:text-[10px] font-medium">
+                            <Github className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
+                            <span>Code</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Category Badge on Image */}
+                      <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-10">
+                        <span
+                          className={cn(
+                            "px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[8px] sm:text-[10px] font-bold uppercase tracking-wider backdrop-blur-md border shadow-md",
+                            categoryBadgeStyles[project.category] ||
+                              "bg-primary/20 text-primary border-primary/30"
+                          )}
+                        >
+                          {project.category}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Card Content */}
+                    <div className="p-3.5 sm:p-5 md:p-6">
+                      <h3 className="text-xs sm:text-lg md:text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-snug mb-1 sm:mb-2 line-clamp-1 sm:line-clamp-none">
+                        {project.title}
+                      </h3>
+
+                      <p className="text-muted-foreground text-[11px] sm:text-xs md:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3 mb-2.5 sm:mb-5">
+                        {project.description}
+                      </p>
+
+                      {/* Tech Stack Pills */}
+                      <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-1 sm:mb-2">
+                        {project.tags.slice(0, 3).map((tag, idx) => (
+                          <span
+                            key={idx}
+                            className="px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-md sm:rounded-lg text-[9px] sm:text-[11px] font-medium bg-muted/60 text-muted-foreground border border-border/50 group-hover:border-primary/20 transition-colors"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                        {project.tags.length > 3 && (
+                          <span className="hidden sm:inline-block px-2 py-0.5 rounded-lg text-[10px] font-medium bg-muted/40 text-muted-foreground">
+                            +{project.tags.length - 3}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons Bar */}
+                  <div className="px-3.5 pb-3.5 sm:px-6 sm:pb-6 pt-1 sm:pt-2 border-t border-border/30 flex items-center justify-between gap-2 sm:gap-3 mt-auto">
+                    {isLive ? (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 py-2 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-primary to-purple-600 text-primary-foreground font-semibold text-[11px] sm:text-xs shadow-md hover:shadow-lg hover:shadow-primary/25 hover:brightness-110 active:scale-[0.98] transition-all duration-300"
+                      >
+                        <span>Live Demo</span>
+                        <ExternalLink className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                      </a>
+                    ) : (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 py-2 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground font-semibold text-[11px] sm:text-xs border border-primary/20 transition-all duration-300"
+                      >
+                        <span>Source</span>
+                        <Github className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                      </a>
+                    )}
+
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-1.5 text-sm font-medium ${
-                        project.githubUrl === "#"
-                          ? "text-muted-foreground cursor-not-allowed"
-                          : "text-foreground/80 hover:text-primary group"
-                      } transition-colors duration-300`}
-                      onClick={(e) =>
-                        project.githubUrl === "#" && e.preventDefault()
-                      }
+                      className="p-2 sm:p-2.5 rounded-lg sm:rounded-xl border border-border/60 hover:border-primary/40 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors shrink-0"
+                      title="View GitHub Code"
                     >
-                      <Code size={15} />
-                      {project.githubUrl === "#" ? "Private" : "View Code"}
-                      <MoveRight
-                        size={13}
-                        className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300"
-                      />
+                      <Github className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     </a>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </AnimatePresence>
-        </div>
+        </motion.div>
 
-        {/* CTA section */}
+        {/* Bottom Collaboration Banner */}
         <motion.div
-          className="text-center mt-16 md:mt-20"
-          initial={{ opacity: 0, y: 20 }}
+          className="mt-20 md:mt-24"
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="bg-gradient-to-r from-muted/30 to-muted/10 border border-muted-foreground/10 rounded-xl p-6 md:p-8 max-w-3xl mx-auto">
-            <h3 className="text-xl md:text-2xl font-bold mb-3">
-              Have a project in mind?
-            </h3>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Let's collaborate to bring your vision to life with cutting-edge
-              technology and exceptional design.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-3">
+          <div className="relative overflow-hidden rounded-3xl p-8 sm:p-12 bg-gradient-to-br from-card via-muted/30 to-background border border-primary/20 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="absolute -right-16 -top-16 w-64 h-64 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="max-w-xl text-center md:text-left">
+              <h3 className="text-2xl sm:text-3xl font-black text-foreground mb-3">
+                Have a project or opportunity?
+              </h3>
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                Let's collaborate to build fast, scalable web applications with state-of-the-art design and clean code.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
               <motion.a
                 href="#contact"
-                whileHover={{
-                  y: -2,
-                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
-                }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-secondary text-primary-foreground font-medium hover:shadow-md transition-all duration-300"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-primary to-purple-600 text-primary-foreground font-semibold text-sm shadow-xl hover:shadow-primary/30 transition-all duration-300"
               >
-                Get in Touch
-                <ArrowRight size={16} className="ml-2" />
+                <span>Let's Build Together</span>
+                <ArrowRight className="h-4 w-4" />
               </motion.a>
+
               <motion.a
                 href="https://github.com/Biren07"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-transparent text-foreground font-medium hover:bg-muted transition-all duration-300 border border-muted-foreground/30 hover:border-primary/50"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-background/80 hover:bg-muted border border-border text-foreground font-semibold text-sm transition-colors duration-300"
               >
-                Explore GitHub
-                <Github size={16} className="ml-2" />
+                <Github className="h-4 w-4" />
+                <span>GitHub Profile</span>
               </motion.a>
             </div>
           </div>
