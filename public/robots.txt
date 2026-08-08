@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://birendrasinghdhami.com.np/sitemap.xml
