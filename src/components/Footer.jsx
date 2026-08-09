@@ -104,13 +104,13 @@ export const Footer = () => {
               </div>
 
               <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed max-w-sm">
-                Crafting modern, fast, and scalable digital web experiences. Passionate about clean architecture, responsive UX, and performant APIs.
+                Full Stack Engineer based in Lalitpur, Nepal. Building dependable web applications with React, Next.js, Node.js, and MongoDB.
               </p>
 
               {/* Status Pill */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] sm:text-xs font-semibold w-fit">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 dark:text-emerald-400 text-[11px] sm:text-xs font-mono font-medium w-fit">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                Available for Freelance & Full-time Roles
+                Available for Select Projects &amp; Roles
               </div>
 
               {/* Social Links */}

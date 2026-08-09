@@ -100,13 +100,11 @@ export const ContactSection = () => {
       }
     } catch (error) {
       toast({
-        title: "Message recorded!",
+        title: "Message could not be sent",
         description:
-          "If you don't receive a response, feel free to email me directly at dhamib610@gmail.com",
-        className:
-          "bg-primary text-primary-foreground border-none shadow-xl",
+          "Please try again or email directly at dhamib610@gmail.com",
+        variant: "destructive",
       });
-      setFormData({ name: "", email: "", subject: "", message: "" });
     } finally {
       setIsSubmitting(false);
     }
@@ -126,139 +124,135 @@ export const ContactSection = () => {
       <div className="container mx-auto max-w-7xl relative">
         {/* Section Header */}
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-14 md:mb-20"
-          initial={{ opacity: 0, y: 25 }}
+          className="text-center max-w-3xl mx-auto mb-12"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <motion.span
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider mb-4"
-            whileHover={{ scale: 1.05 }}
-          >
-            <Sparkles className="h-3.5 w-3.5" /> Let's Connect & Build
-          </motion.span>
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-border text-foreground text-xs font-mono mb-3.5">
+            <Mail className="h-3.5 w-3.5 text-primary" /> get_in_touch.sh
+          </span>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-foreground mb-4">
-            Have a Project in Mind?{" "}
-            <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              Let's Talk
+            Let's Connect &amp;{" "}
+            <span className="bg-gradient-to-r from-primary via-purple-500 to-indigo-400 bg-clip-text text-transparent">
+              Collaborate
             </span>
           </h2>
 
-          <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-            I'm always open to discussing new opportunities, full-stack web applications, contract roles, or technical collaborations.
+          <p className="text-muted-foreground text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+            Have an interesting project, full-stack opportunity, or want to discuss technical architecture? Send me a note and I'll get back to you promptly.
           </p>
         </motion.div>
 
         {/* Contact Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 items-stretch">
-          {/* Left Column: Direct Info & Communication Bento (5 cols) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-stretch">
+          {/* Left Column: Direct Info & Communication Channels (5 cols on desktop) */}
           <motion.div
-            className="lg:col-span-5 flex flex-col justify-between space-y-6"
-            initial={{ opacity: 0, x: -30 }}
+            className="lg:col-span-5 flex flex-col"
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="bg-card/60 dark:bg-card/40 border border-border/60 rounded-3xl p-6 sm:p-8 backdrop-blur-xl shadow-xl space-y-6 relative overflow-hidden group">
-              {/* Top Accent Gradient */}
-              <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-primary via-purple-500 to-pink-500" />
-
+            <div className="h-full bg-card border border-border rounded-3xl p-6 sm:p-8 shadow-md flex flex-col justify-between space-y-6">
               <div>
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2 flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5 text-primary" /> Contact Channels
-                </h3>
-                <p className="text-muted-foreground text-xs sm:text-sm">
-                  Choose the communication channel that works best for you.
-                </p>
-              </div>
+                <div className="mb-6">
+                  <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-1.5 flex items-center gap-2">
+                    <MessageSquare className="h-5 w-5 text-primary" /> Contact Channels
+                  </h3>
+                  <p className="text-muted-foreground text-xs sm:text-sm">
+                    Feel free to reach out directly through any of the channels below.
+                  </p>
+                </div>
 
-              {/* Direct Info List - 2 Columns Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
-                {/* Email Card with Copy button */}
-                <div className="p-3.5 sm:p-4 rounded-2xl bg-muted/40 border border-border/50 hover:border-primary/40 transition-all duration-300 flex items-center justify-between gap-2.5 group/item">
-                  <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-                    <div className="p-2 sm:p-2.5 rounded-xl bg-primary/10 text-primary shrink-0">
-                      <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
+                {/* Direct Info Cards: 1-col on mobile, 2-col on tablet, 1-col on desktop for maximum breathing room */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3.5">
+                  {/* Email Card with Copy button */}
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-muted/50 border border-border/70 hover:border-primary/40 transition-colors flex items-center justify-between gap-3 group/item">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="p-2.5 rounded-xl bg-primary/10 text-primary shrink-0">
+                        <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-[10px] sm:text-[11px] text-muted-foreground font-mono uppercase tracking-wider">
+                          Email Address
+                        </p>
+                        <a
+                          href="mailto:dhamib610@gmail.com"
+                          className="text-xs sm:text-sm font-semibold text-foreground hover:text-primary transition-colors truncate block"
+                        >
+                          dhamib610@gmail.com
+                        </a>
+                      </div>
+                    </div>
+
+                    <motion.button
+                      onClick={handleCopyEmail}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="p-2 rounded-xl bg-background hover:bg-primary hover:text-primary-foreground border border-border text-muted-foreground transition-colors cursor-pointer shrink-0"
+                      title="Copy Email"
+                    >
+                      {copiedEmail ? (
+                        <Check className="h-4 w-4 text-emerald-500" />
+                      ) : (
+                        <Copy className="h-4 w-4" />
+                      )}
+                    </motion.button>
+                  </div>
+
+                  {/* Phone Card */}
+                  <a
+                    href="tel:+9779841355789"
+                    className="p-3.5 sm:p-4 rounded-2xl bg-muted/50 border border-border/70 hover:border-primary/40 transition-colors flex items-center gap-3 group/phone block"
+                  >
+                    <div className="p-2.5 rounded-xl bg-purple-500/10 text-purple-400 shrink-0">
+                      <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-[10px] sm:text-[11px] text-muted-foreground font-semibold uppercase tracking-wider">
-                        Email Address
+                      <p className="text-[10px] sm:text-[11px] text-muted-foreground font-mono uppercase tracking-wider">
+                        Phone &amp; WhatsApp
                       </p>
-                      <a
-                        href="mailto:dhamib610@gmail.com"
-                        className="text-xs sm:text-sm font-bold text-foreground hover:text-primary transition-colors truncate block"
-                      >
-                        dhamib610@gmail.com
-                      </a>
+                      <p className="text-xs sm:text-sm font-semibold text-foreground group-hover/phone:text-primary transition-colors">
+                        +977 9841355789
+                      </p>
+                    </div>
+                  </a>
+
+                  {/* Location Card */}
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-muted/50 border border-border/70 flex items-center gap-3">
+                    <div className="p-2.5 rounded-xl bg-pink-500/10 text-pink-400 shrink-0">
+                      <MapPin className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-[10px] sm:text-[11px] text-muted-foreground font-mono uppercase tracking-wider">
+                        Location
+                      </p>
+                      <p className="text-xs sm:text-sm font-semibold text-foreground truncate">
+                        Sanepa, Lalitpur • Nepal
+                      </p>
                     </div>
                   </div>
 
-                  <motion.button
-                    onClick={handleCopyEmail}
-                    whileHover={{ scale: 1.08 }}
-                    whileTap={{ scale: 0.92 }}
-                    className="p-1.5 sm:p-2 rounded-xl bg-background/80 hover:bg-primary hover:text-primary-foreground border border-border text-muted-foreground transition-colors cursor-pointer shrink-0"
-                    title="Copy Email"
-                  >
-                    {copiedEmail ? (
-                      <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-emerald-500" />
-                    ) : (
-                      <Copy className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                    )}
-                  </motion.button>
-                </div>
-
-                {/* Phone Card */}
-                <a
-                  href="tel:+9779841355789"
-                  className="p-3.5 sm:p-4 rounded-2xl bg-muted/40 border border-border/50 hover:border-primary/40 transition-all duration-300 flex items-center gap-2.5 sm:gap-3 group/phone block"
-                >
-                  <div className="p-2 sm:p-2.5 rounded-xl bg-purple-500/10 text-purple-400 shrink-0">
-                    <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] sm:text-[11px] text-muted-foreground font-semibold uppercase tracking-wider">
-                      Phone & WhatsApp
-                    </p>
-                    <p className="text-xs sm:text-sm font-bold text-foreground group-hover/phone:text-primary transition-colors">
-                      +977 9841355789
-                    </p>
-                  </div>
-                </a>
-
-                {/* Location Card */}
-                <div className="p-3.5 sm:p-4 rounded-2xl bg-muted/40 border border-border/50 flex items-center gap-2.5 sm:gap-3">
-                  <div className="p-2 sm:p-2.5 rounded-xl bg-pink-500/10 text-pink-400 shrink-0">
-                    <MapPin className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] sm:text-[11px] text-muted-foreground font-semibold uppercase tracking-wider">
-                      Location
-                    </p>
-                    <p className="text-xs sm:text-sm font-bold text-foreground truncate">
-                      Sanepa, Lalitpur • Nepal
-                    </p>
-                  </div>
-                </div>
-
-                {/* Response Time Guarantee Pill */}
-                <div className="p-3.5 sm:p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-2.5 sm:gap-3">
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                  <div>
-                    <p className="text-[10px] sm:text-[11px] text-emerald-400 font-semibold uppercase tracking-wider">
-                      Response Speed
-                    </p>
-                    <p className="text-xs sm:text-sm font-bold text-emerald-400">
-                      Within 24 Hours
-                    </p>
+                  {/* Response Speed Guarantee */}
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-3">
+                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0 ml-1" />
+                    <div className="min-w-0">
+                      <p className="text-[10px] sm:text-[11px] text-emerald-500 dark:text-emerald-400 font-mono uppercase tracking-wider">
+                        Response Time
+                      </p>
+                      <p className="text-xs sm:text-sm font-bold text-emerald-500 dark:text-emerald-400">
+                        Prompt reply within 24 hours
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Social Channels */}
-              <div className="pt-2">
+              <div className="pt-4 border-t border-border/60">
                 <p className="text-xs text-muted-foreground font-semibold mb-3">
                   Find Me Online:
                 </p>
@@ -267,7 +261,7 @@ export const ContactSection = () => {
                     href="https://www.linkedin.com/in/birendra-c-ingh-dhami-6264b7279/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 p-3 rounded-xl bg-muted/60 hover:bg-blue-600 hover:text-white border border-border/60 text-xs font-semibold text-foreground transition-all duration-300"
+                    className="flex-1 inline-flex items-center justify-center gap-2 p-2.5 rounded-xl bg-muted/60 hover:bg-primary hover:text-primary-foreground border border-border text-xs font-semibold text-foreground transition-colors"
                   >
                     <Linkedin className="h-4 w-4" />
                     <span>LinkedIn</span>
@@ -277,7 +271,7 @@ export const ContactSection = () => {
                     href="https://github.com/Biren07"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 p-3 rounded-xl bg-muted/60 hover:bg-purple-600 hover:text-white border border-border/60 text-xs font-semibold text-foreground transition-all duration-300"
+                    className="flex-1 inline-flex items-center justify-center gap-2 p-2.5 rounded-xl bg-muted/60 hover:bg-primary hover:text-primary-foreground border border-border text-xs font-semibold text-foreground transition-colors"
                   >
                     <Github className="h-4 w-4" />
                     <span>GitHub</span>
@@ -287,26 +281,26 @@ export const ContactSection = () => {
             </div>
           </motion.div>
 
-          {/* Right Column: Modern Glassmorphic Form (7 cols) */}
+          {/* Right Column: Clean Form (7 cols on desktop) */}
           <motion.div
             className="lg:col-span-7 flex flex-col"
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="h-full bg-card/60 dark:bg-card/40 border border-border/60 rounded-3xl p-6 sm:p-8 md:p-10 backdrop-blur-xl shadow-xl flex flex-col justify-between relative overflow-hidden">
+            <div className="h-full bg-card border border-border rounded-3xl p-6 sm:p-8 md:p-9 shadow-md flex flex-col justify-between">
               {/* Form Title */}
               <div className="mb-6">
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-1.5">
                   Send a Direct Message
                 </h3>
                 <p className="text-muted-foreground text-xs sm:text-sm">
-                  Fill out the details below and I'll get back to you promptly.
+                  Fill out your details below and it will be delivered directly to my inbox.
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Name */}
                   <div className="space-y-1.5 text-left">
@@ -323,8 +317,8 @@ export const ContactSection = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      placeholder="e.g. John Doe"
-                      className="w-full px-4 py-3 rounded-xl border border-border bg-background/80 focus:bg-background focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all text-sm"
+                      placeholder="e.g. Birendar......"
+                      className="w-full px-4 py-2.5 sm:py-3 rounded-xl border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all text-sm"
                     />
                   </div>
 
@@ -343,8 +337,8 @@ export const ContactSection = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      placeholder="e.g. john@example.com"
-                      className="w-full px-4 py-3 rounded-xl border border-border bg-background/80 focus:bg-background focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all text-sm"
+                      placeholder="e.g. biren@example.com"
+                      className="w-full px-4 py-2.5 sm:py-3 rounded-xl border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all text-sm"
                     />
                   </div>
                 </div>
@@ -363,8 +357,8 @@ export const ContactSection = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    placeholder="e.g. Full-Stack Web App Development / Freelance Project"
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-background/80 focus:bg-background focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all text-sm"
+                    placeholder="e.g. Full-Stack Web App / Freelance Project"
+                    className="w-full px-4 py-2.5 sm:py-3 rounded-xl border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all text-sm"
                   />
                 </div>
 
@@ -374,7 +368,7 @@ export const ContactSection = () => {
                     htmlFor="message"
                     className="text-xs font-semibold text-foreground"
                   >
-                    Project Description or Message <span className="text-primary">*</span>
+                    Message Content <span className="text-primary">*</span>
                   </label>
                   <textarea
                     id="message"
@@ -382,9 +376,9 @@ export const ContactSection = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows={5}
+                    rows={4}
                     placeholder="Tell me about your project goals, timeline, or any questions..."
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-background/80 focus:bg-background focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all text-sm resize-none"
+                    className="w-full px-4 py-2.5 sm:py-3 rounded-xl border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all text-sm resize-none"
                   />
                 </div>
 
@@ -393,7 +387,7 @@ export const ContactSection = () => {
                   type="submit"
                   disabled={isSubmitting}
                   className={cn(
-                    "w-full flex items-center justify-center gap-2 py-3.5 px-7 rounded-xl bg-gradient-to-r from-primary to-purple-600 text-primary-foreground font-bold shadow-lg hover:shadow-primary/30 text-sm cursor-pointer transition-all duration-300 hover:brightness-110",
+                    "w-full flex items-center justify-center gap-2 py-3 sm:py-3.5 px-6 rounded-xl bg-primary text-primary-foreground font-semibold shadow-sm hover:bg-primary/90 text-sm cursor-pointer transition-colors",
                     isSubmitting && "opacity-80 cursor-not-allowed"
                   )}
                   whileHover={{ scale: 1.01 }}

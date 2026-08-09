@@ -72,28 +72,25 @@ export const CertificatesSection = () => {
       <div className="container mx-auto max-w-7xl relative">
         {/* Section Header */}
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-14 md:mb-20"
-          initial={{ opacity: 0, y: 25 }}
+          className="text-center max-w-3xl mx-auto mb-12"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <motion.span
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider mb-4"
-            whileHover={{ scale: 1.05 }}
-          >
-            <Award className="h-3.5 w-3.5" /> Verified Credentials
-          </motion.span>
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-border text-foreground text-xs font-mono mb-3.5">
+            <Award className="h-3.5 w-3.5 text-primary" /> credentials_and_certifications
+          </span>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-foreground mb-4">
             Professional{" "}
-            <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              Certificates & Credentials
+            <span className="bg-gradient-to-r from-primary via-purple-500 to-indigo-400 bg-clip-text text-transparent">
+              Certifications
             </span>
           </h2>
 
-          <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-            Formally certified and verified technical proficiencies in Full-Stack MERN Architecture, Backend Systems, and Industry Internship Experience.
+          <p className="text-muted-foreground text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+            Verified formal certifications in Full-Stack MERN Architecture, PHP/Laravel Backend Engineering, and Industry Web Development Internship in Kathmandu.
           </p>
         </motion.div>
 
