@@ -12,6 +12,7 @@ import {
   VolumeX,
   Github,
   Linkedin,
+  Facebook,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -158,7 +159,8 @@ export const Navbar = () => {
             <a
               href="https://github.com/Biren07"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer me"
+              aria-label="Visit Birendra Singh Dhami on GitHub"
               className="p-2 rounded-xl border border-border/60 hover:border-primary/40 bg-background/80 text-muted-foreground hover:text-foreground transition-all hidden sm:flex"
               title="GitHub Profile"
             >
@@ -166,13 +168,25 @@ export const Navbar = () => {
             </a>
 
             <a
-              href="https://linkedin.com/in/birendra-singh-dhami"
+              href="https://www.linkedin.com/in/birendra-c-ingh-dhami-6264b7279"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer me"
+              aria-label="Visit Birendra Singh Dhami on LinkedIn"
               className="p-2 rounded-xl border border-border/60 hover:border-primary/40 bg-background/80 text-muted-foreground hover:text-foreground transition-all hidden sm:flex"
               title="LinkedIn Profile"
             >
               <Linkedin className="h-4 w-4" />
+            </a>
+
+            <a
+              href="https://www.facebook.com/share/1B9EAuN8Wx/"
+              target="_blank"
+              rel="noopener noreferrer me"
+              aria-label="Visit Birendra Singh Dhami on Facebook"
+              className="p-2 rounded-xl border border-border/60 hover:border-primary/40 bg-background/80 text-muted-foreground hover:text-foreground transition-all hidden sm:flex"
+              title="Facebook Profile"
+            >
+              <Facebook className="h-4 w-4" />
             </a>
           </div>
         </div>

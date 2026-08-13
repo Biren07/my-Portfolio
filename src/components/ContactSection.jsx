@@ -1,16 +1,14 @@
 import {
   Linkedin,
+  Github,
+  Facebook,
   Mail,
   MapPin,
   Phone,
   Send,
-  Github,
   Loader2,
-  Sparkles,
   Copy,
   Check,
-  Clock,
-  Globe,
   MessageSquare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -256,25 +254,38 @@ export const ContactSection = () => {
                 <p className="text-xs text-muted-foreground font-semibold mb-3">
                   Find Me Online:
                 </p>
-                <div className="flex gap-3">
+                <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
                   <a
-                    href="https://www.linkedin.com/in/birendra-c-ingh-dhami-6264b7279/"
+                    href="https://www.linkedin.com/in/birendra-c-ingh-dhami-6264b7279"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 p-2.5 rounded-xl bg-muted/60 hover:bg-primary hover:text-primary-foreground border border-border text-xs font-semibold text-foreground transition-colors"
+                    rel="noopener noreferrer me"
+                    aria-label="Visit Birendra Singh Dhami on LinkedIn"
+                    className="inline-flex items-center justify-center gap-1.5 p-2.5 rounded-xl bg-muted/60 hover:bg-primary hover:text-primary-foreground border border-border text-xs font-semibold text-foreground transition-colors"
                   >
-                    <Linkedin className="h-4 w-4" />
+                    <Linkedin className="h-4 w-4 shrink-0" />
                     <span>LinkedIn</span>
                   </a>
 
                   <a
                     href="https://github.com/Biren07"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 p-2.5 rounded-xl bg-muted/60 hover:bg-primary hover:text-primary-foreground border border-border text-xs font-semibold text-foreground transition-colors"
+                    rel="noopener noreferrer me"
+                    aria-label="Visit Birendra Singh Dhami on GitHub"
+                    className="inline-flex items-center justify-center gap-1.5 p-2.5 rounded-xl bg-muted/60 hover:bg-primary hover:text-primary-foreground border border-border text-xs font-semibold text-foreground transition-colors"
                   >
-                    <Github className="h-4 w-4" />
+                    <Github className="h-4 w-4 shrink-0" />
                     <span>GitHub</span>
+                  </a>
+
+                  <a
+                    href="https://www.facebook.com/share/1B9EAuN8Wx/"
+                    target="_blank"
+                    rel="noopener noreferrer me"
+                    aria-label="Visit Birendra Singh Dhami on Facebook"
+                    className="inline-flex items-center justify-center gap-1.5 p-2.5 rounded-xl bg-muted/60 hover:bg-primary hover:text-primary-foreground border border-border text-xs font-semibold text-foreground transition-colors"
+                  >
+                    <Facebook className="h-4 w-4 shrink-0" />
+                    <span>Facebook</span>
                   </a>
                 </div>
               </div>

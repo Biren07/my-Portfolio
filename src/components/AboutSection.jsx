@@ -85,7 +85,8 @@ export const AboutSection = () => {
                   <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-muted border border-border shrink-0 shadow-sm">
                     <img
                       src={profile?.profileImage || "/profile.jpeg"}
-                      alt="Birendra Singh Dhami"
+                      alt="Birendra Singh Dhami - Full Stack Engineer at JavTech Infosys"
+                      loading="lazy"
                       className="w-full h-full object-cover object-top filter contrast-[1.03]"
                       onError={(e) => {
                         e.target.src = "/Birendra Dhami.png";

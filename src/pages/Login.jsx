@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Lock, User, Loader2, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { adminLogin } from "../services/api";
+import { SEO } from "../components/SEO";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -65,6 +66,12 @@ export const Login = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex items-center justify-center p-4 relative overflow-hidden">
+      <SEO
+        title="Admin Login | Birendra Singh Dhami"
+        description="Admin Login portal for Birendra Singh Dhami portfolio."
+        canonicalUrl="https://birendrasinghdhami07.com.np/login"
+        noindex={true}
+      />
       {/* Background drifting glow elements */}
       <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-purple-600/10 rounded-full blur-[100px] pointer-events-none"></div>

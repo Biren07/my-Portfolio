@@ -200,7 +200,8 @@ export const HeroSection = () => {
                 <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[21rem] lg:h-[21rem] rounded-[1.4rem] sm:rounded-[2.2rem] overflow-hidden bg-muted border border-background shadow-inner">
                   <img
                     src="/profile.jpeg"
-                    alt="Birendra Singh Dhami"
+                    alt="Birendra Singh Dhami - Full Stack Developer Profile Picture"
+                    loading="eager"
                     className="w-full h-full object-cover object-top filter contrast-[1.03] group-hover:scale-105 transition-transform duration-500 ease-out"
                     onError={(e) => {
                       e.target.src = "/Birendra Dhami.png";

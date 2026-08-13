@@ -2,12 +2,12 @@ import {
   ArrowUp,
   Linkedin,
   Github,
+  Facebook,
   Mail,
   Phone,
   Heart,
   Sparkles,
   MapPin,
-  Code2,
   Send,
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -19,20 +19,26 @@ export const Footer = () => {
   const socialLinks = [
     {
       icon: <Linkedin size={18} />,
-      href: "https://www.linkedin.com/in/birendra-c-ingh-dhami-6264b7279/",
-      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/birendra-c-ingh-dhami-6264b7279",
+      label: "Visit Birendra Singh Dhami on LinkedIn",
       color: "hover:text-blue-500 hover:border-blue-500/40",
     },
     {
       icon: <Github size={18} />,
       href: "https://github.com/Biren07",
-      label: "GitHub",
+      label: "Visit Birendra Singh Dhami on GitHub",
       color: "hover:text-purple-400 hover:border-purple-500/40",
+    },
+    {
+      icon: <Facebook size={18} />,
+      href: "https://www.facebook.com/share/1B9EAuN8Wx/",
+      label: "Visit Birendra Singh Dhami on Facebook",
+      color: "hover:text-blue-600 hover:border-blue-600/40",
     },
     {
       icon: <Mail size={18} />,
       href: "mailto:dhamib610@gmail.com",
-      label: "Email",
+      label: "Send email to Birendra Singh Dhami",
       color: "hover:text-pink-500 hover:border-pink-500/40",
     },
   ];
@@ -120,7 +126,7 @@ export const Footer = () => {
                     key={index}
                     href={social.href}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener noreferrer me"
                     aria-label={social.label}
                     className={cn(
                       "p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-muted/60 text-muted-foreground border border-border/60 transition-all duration-300 shadow-sm",

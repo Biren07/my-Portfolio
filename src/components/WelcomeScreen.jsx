@@ -114,9 +114,9 @@ export const WelcomeScreen = ({ onWelcomeComplete }) => {
               transition={{ delay: 0.15, duration: 0.6 }}
               className="mb-5 sm:mb-7"
             >
-              <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white mb-1.5">
+              <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white mb-1.5">
                 BIRENDRA SINGH DHAMI
-              </h1>
+              </h2>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[11px] sm:text-xs font-semibold text-primary">
                 <Zap className="h-3 w-3 text-primary animate-pulse" />
                 <span>Full Stack Developer || MERN Stack</span>

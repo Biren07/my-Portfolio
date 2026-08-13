@@ -27,6 +27,7 @@ import {
   getProfile,
   updateProfile
 } from "../services/api";
+import { SEO } from "../components/SEO";
 
 export const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -296,6 +297,12 @@ export const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col p-4 md:p-8">
+      <SEO
+        title="Admin Dashboard | Birendra Singh Dhami"
+        description="Admin Dashboard for Birendra Singh Dhami portfolio."
+        canonicalUrl="https://birendrasinghdhami07.com.np/admin"
+        noindex={true}
+      />
       {/* Top Header */}
       <div className="w-full max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-border pb-6 mb-8">
         <div className="text-center sm:text-left">

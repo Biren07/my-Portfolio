@@ -274,7 +274,7 @@ export const ProjectsSection = () => {
                     <div className="relative aspect-[16/10] overflow-hidden bg-muted/40 border-b border-border/40">
                       <img
                         src={project.image}
-                        alt={project.title}
+                        alt={`${project.title} - ${project.category} web application built by Birendra Singh Dhami`}
                         className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                         loading="lazy"
                         onError={(e) => {
